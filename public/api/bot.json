@@ -1,0 +1,16 @@
+{
+  "home": {
+    "hero": {
+      "role": "She is a full-stack engineer",
+      "summary": "She likes owning products end-to-end. She cares as much about why and what is being built as how it's being built. She thoroughly enjoys finding solutions to ambiguous problems and building something people actually want to use.",
+      "aka": {
+        "title": "aka Utility Player",
+        "body": "A label her youth soccer coach gave her for being able to play any position on the field."
+      }
+    },
+    "info": {
+      "title": "Hi! She is Marissa. She is a product-minded, AI-tinkering, polyglot builder and lifelong learner.",
+      "summary": "She is also a former retail buyer, a futebol player, a marathon runner, and a digital nomad. Her path here wasn't a straight line, and that is where her instincts come from. Business school and buying taught her to see a business as a system. Design school taught her to start from the person using the thing. Consulting let her practice both, and building payments at Flexa sharpened the systems side. Now she builds things people want, and she builds them so the pieces hold together."
+    }
+  }
+}
