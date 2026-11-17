@@ -3,7 +3,7 @@
 ## What this repo is
 A prototype for a small chatbot that will live on a personal portfolio site.
 
-The first question: can an embedding model and a small generative model load in the browser, locally, and answer usefully from her content?
+The first question: can an embedding model and a small generative model load in the browser, locally, and answer usefully from the content?
 
 ## Hard constraints
 
@@ -28,9 +28,9 @@ Built with [Vite](https://vite.dev) and React. Pages are pre-rendered to static 
 3. **Model test.** Load one generative model on WebGPU, give it the correct chunks by hand, and ask about ten open questions.
 4. **Record what happened** under [Results](#results).
 
-## Results
+#### Results
 
-### 2026-11-17: Embedding model load time
+##### 2026-11-17: Embedding model load time
 
 | | |
 |---|---|
@@ -61,3 +61,7 @@ Same setup as above, except `revision: "751bff37182d3f1213fa05d7196b954e230abad9
 | Cached | ≈ 794 ms | ≈ 764 ms | ≈ 787 ms |
 
 Cached loads with the pinned revision are consistent at about 0.76–0.79 s. That is about double the single unpinned cached run above (≈ 404 ms); the cause is not yet known.
+
+## Licence
+
+Code is [MIT](LICENSE). The site content in `public/api/` is not covered by the licence: © 2026 Marissa Biesecker, all rights reserved.
