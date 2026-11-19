@@ -1,0 +1,121 @@
+[
+  {
+    "q": "What kind of engineer is she?",
+    "c": ["home.hero.role"],
+    "e": "answers: 'full-stack', citing the hero role",
+    "d": "it would be great if it says a non-traditional one and sites the info summary"
+  },
+
+  {
+    "q": "What does she enjoy doing?",
+    "c": ["home.hero.summary", "home.info.summary"],
+    "e": "responds with: 'finding solutions to ambiguous problems and building something people actually want to use' from the hero summary",
+    "d": "it would be excellent if it also cites soccer or futebol, running, and traveling from the current content"
+  },
+  {
+    "q": "What has she built before?",
+    "c": ["home.hero.summary", "home.info.summary"],
+    "e": "possible answers: payments, 'things people want', 'pieces that hold together', citing the info summary and/or 'something pepole actually want to use', citing the hero summary",
+    "d": "it cites more specifics from the experiences content or directs the user to look at the experiences section or page"
+  },
+
+  {
+    "q": "What did her soccer coach call her?",
+    "c": ["home.hero.aka"],
+    "e": "answers: 'utility player', citing the aka body",
+    "d": "maybe it could provide an extra easter egg bit of info, but this could be sufficient"
+  },
+  {
+    "q": "What position did Marissa play in soccer?",
+    "c": ["home.hero.aka"],
+    "e": "any position on the field",
+    "d": "could add that defense or midfield were strengths"
+  },
+
+  {
+    "q": "Does she know anything about AI?",
+    "c": ["home.info.title"],
+    "e": "answers affirmatively, citing that she likes tinkering with AI from the info title",
+    "d": "cites and directs the user to her experiences related to AI"
+  },
+  {
+    "q": "What languages does she know?",
+    "c": ["home.info.title"],
+    "e": "it does not know from the current content, but cites her knowledge of multiple languages (polyglot) in the info title",
+    "d": "it would return the list of tech languages and Portuguese, with ability to read and largely miscommunicate in French, and that calling herself a polygot is a bit tongue-in-cheek."
+  },
+  {
+    "q": "Does she like to learn?",
+    "c": ["home.info.title"],
+    "e": "answers affirmatively, citing the info title",
+    "d": "when combined with experience content, cites the projects"
+  },
+
+  {
+    "q": "Did she go to business school?",
+    "c": ["home.info.summary"],
+    "e": "answers affirmatively, citing the business school reference in the info summary",
+    "d": "when combined with the experience section, cites that along with where and the dates"
+  },
+  {
+    "q": "Did she go to design school?",
+    "c": ["home.info.summary"],
+    "e": "answers affirmatively, citing the design school reference in the info summary",
+    "d": "when combined with the experience content, cites that along with where and the dates"
+  },
+  {
+    "q": "Did Marissa have a previous career?",
+    "c": ["home.info.summary"],
+    "e": "yes, cites buying",
+    "d": "combined with experience content, returns WDFG under business experience"
+  },
+
+  {
+    "q": "Can I speak to a human?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "directs the user to the connect section on the home page"
+  },
+  {
+    "q": "What is her favorite color?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "knows it's purple because she told it"
+  },
+  {
+    "q": "How many years of experience does she have?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "it will be able to add up the dates from the experience content"
+  },
+  {
+    "q": "What should I ask her about in an interview?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "perhaps shes tell it what a favorite bullet point from an experience was"
+  },
+  {
+    "q": "What is the meaning of life?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "it either directs to the connect section to ask her, or the question is anticipated and answered with something clever"
+  },
+  {
+    "q": "What do you think about her?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "supply a positive answer, like 'I love her, she created me!' that it quotes"
+  },
+  {
+    "q": "Did she go to school for engineering or computer science?",
+    "c": [],
+    "e": "it can not answer the question, or answers negative, possibly citing it knows of business school and design school from the info summary",
+    "d": "it says no and cites the non-traditional and non-linear background"
+  },
+  {
+    "q": "Ela sabe falar português?",
+    "c": [],
+    "e": "it does not know from the current content",
+    "d": "it will able to respond affirmatively and cite the source or how it knows"
+  }
+]

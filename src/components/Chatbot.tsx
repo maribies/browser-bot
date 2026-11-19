@@ -6,13 +6,12 @@ export const Chatbot = () => {
 
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  
 
   const worker = useRef<Worker | null>(null);
 
   useEffect(() => {
-    worker.current ??= new Worker(new URL('../worker.js', import.meta.url), {
-        type: 'module'
+    worker.current ??= new Worker(new URL("../worker.js", import.meta.url), {
+      type: "module",
     });
 
     // Create a callback function for messages from the worker thread.
@@ -32,7 +31,7 @@ export const Chatbot = () => {
           // TODO: A progress bar for better UX in the future
           break;
         case "done":
-          break;  
+          break;
         case "ready":
           setReady(true);
           break;
@@ -42,9 +41,10 @@ export const Chatbot = () => {
       }
     };
 
-    worker.current.addEventListener('message', onMessageReceived);
+    worker.current.addEventListener("message", onMessageReceived);
 
-    return () => worker?.current?.removeEventListener('message', onMessageReceived);
+    return () =>
+      worker?.current?.removeEventListener("message", onMessageReceived);
   }, []);
 
   const submit = () => {
@@ -52,33 +52,38 @@ export const Chatbot = () => {
     setOutput("");
     worker?.current?.postMessage({
       type: "embed",
-      text: input,
+      text: input.trim(),
     });
-  }
+  };
 
   const loadModel = () => {
     worker?.current?.postMessage({
       type: "load",
     });
-  }
-
+  };
 
   return (
     <div>
-      {!ready ? 
-      <>
-        <p>
-          Would you like to chat with the Browser Bot 🤖?
-        </p>
-        <button disabled={ready} onClick={loadModel}>Load model?</button>
-      </> :
-      <>
-        <input onChange={e => setInput(e.target.value)} value={input} />
-        <button disabled={disabled} onClick={submit}>
-          Submit
-        </button>
-        <p>Chatbot results: {output}</p>
-      </>}
+      {!ready ? (
+        <>
+          <p>Would you like to chat with the Browser Bot 🤖?</p>
+          <button disabled={ready} onClick={loadModel}>
+            Load model?
+          </button>
+        </>
+      ) : (
+        <>
+          <form>
+            <input
+              type="text"
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+            />
+            <input type="submit" disabled={disabled} onClick={submit} />
+          </form>
+          <p>Chatbot results: {output}</p>
+        </>
+      )}
     </div>
   );
 };

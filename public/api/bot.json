@@ -3,10 +3,7 @@
     "hero": {
       "role": "She is a full-stack engineer",
       "summary": "She likes owning products end-to-end. She cares as much about why and what is being built as how it's being built. She thoroughly enjoys finding solutions to ambiguous problems and building something people actually want to use.",
-      "aka": {
-        "title": "aka Utility Player",
-        "body": "A label her youth soccer coach gave her for being able to play any position on the field."
-      }
+      "aka": "aka Utility Player, A designation awarded to her by her youth soccer coach for being able to play any position on the field."
     },
     "info": {
       "title": "Hi! She is Marissa. She is a product-minded, AI-tinkering, polyglot builder and lifelong learner.",

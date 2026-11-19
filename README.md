@@ -1,6 +1,7 @@
 # Browser Bot Experiment
 
 ## What this repo is
+
 A prototype for a small chatbot that will live on a personal portfolio site.
 
 The first question: can an embedding model and a small generative model load in the browser, locally, and answer usefully from the content?
@@ -28,26 +29,31 @@ Built with [Vite](https://vite.dev) and React. Pages are pre-rendered to static 
 3. **Model test.** Load one generative model on WebGPU, give it the correct chunks by hand, and ask about ten open questions.
 4. **Record what happened** under [Results](#results).
 
+Development notes to consider when moving out of the prototype:
+
+- If the third person voice makes a difference, for the real implementation, supporting two nearly identical json files and making sure they don't drift is unrealistic. A programmatic solution should be implemented.
+- We are only submitting one answer at a time, but keeping the chat viewable in history would be expected. And keeping the history in component state would make it easy to input back into a model later if work goes in that direction.
+
 #### Results
 
 ##### 2026-11-17: Embedding model load time
 
-| | |
-|---|---|
-| Model | `Xenova/all-MiniLM-L6-v2` (`model_quantized.onnx`) |
-| Revision | `main` (not pinned), at commit `751bff37182d3f1213fa05d7196b954e230abad9` |
-| Library | `@huggingface/transformers` 4.3.2 |
-| Device | default (`device` not set) |
-| Browser | Brave 1.98.63 (arm64), Chromium 156.0.8078.80 |
-| Machine / GPU | MacBook Pro, Apple M3 Pro (integrated GPU), 36 GB memory, macOS Tahoe 26.7.3 |
-| Storage | 994.66 GB disk, 838.8 GB free; browser storage quota for the origin ≈ 596,798 MB, 50.6 MB used after loading |
+|               |                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| Model         | `Xenova/all-MiniLM-L6-v2` (`model_quantized.onnx`)                                                           |
+| Revision      | `main` (not pinned), at commit `751bff37182d3f1213fa05d7196b954e230abad9`                                    |
+| Library       | `@huggingface/transformers` 4.3.2                                                                            |
+| Device        | default (`device` not set)                                                                                   |
+| Browser       | Brave 1.98.63 (arm64), Chromium 156.0.8078.80                                                                |
+| Machine / GPU | MacBook Pro, Apple M3 Pro (integrated GPU), 36 GB memory, macOS Tahoe 26.7.3                                 |
+| Storage       | 994.66 GB disk, 838.8 GB free; browser storage quota for the origin ≈ 596,798 MB, 50.6 MB used after loading |
 
 Measured in the worker with `performance.now()` around the first `getInstance` call, so it covers download (if any), tokenizer setup and ONNX session creation.
 
-| Load | Time | Runs |
-|---|---|---|
-| Cold (browser cache cleared) | ≈ 1,830 ms | 1 |
-| Cached | ≈ 404 ms | 1 |
+| Load                         | Time       | Runs |
+| ---------------------------- | ---------- | ---- |
+| Cold (browser cache cleared) | ≈ 1,830 ms | 1    |
+| Cached                       | ≈ 404 ms   | 1    |
 
 Ranking quality not yet tested.
 
@@ -55,10 +61,10 @@ Ranking quality not yet tested.
 
 Same setup as above, except `revision: "751bff37182d3f1213fa05d7196b954e230abad9"` is passed to `pipeline()`. Each cached run followed a page refresh, so each started a fresh worker.
 
-| Load | Run 1 | Run 2 | Run 3 |
-|---|---|---|---|
-| Cold (first load of the pinned revision) | ≈ 2,162 ms | | |
-| Cached | ≈ 794 ms | ≈ 764 ms | ≈ 787 ms |
+| Load                                     | Run 1      | Run 2    | Run 3    |
+| ---------------------------------------- | ---------- | -------- | -------- |
+| Cold (first load of the pinned revision) | ≈ 2,162 ms |          |          |
+| Cached                                   | ≈ 794 ms   | ≈ 764 ms | ≈ 787 ms |
 
 Cached loads with the pinned revision are consistent at about 0.76–0.79 s. That is about double the single unpinned cached run above (≈ 404 ms); the cause is not yet known.
 

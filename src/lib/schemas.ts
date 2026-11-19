@@ -3,7 +3,7 @@ import { z } from "zod";
 const heroCopySchema = z.object({
   role: z.string(),
   summary: z.string(),
-  aka: z.object({ title: z.string(), body: z.string() }),
+  aka: z.string(),
 });
 
 const infoCopySchema = z.object({
