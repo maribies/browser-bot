@@ -110,7 +110,7 @@ async function getSiteData(): SiteData {
 }
 
 self.addEventListener("message", async (event) => {
-  const { text, type } = event.data;
+  const { type } = event.data;
 
   if (type == "load") {
     // To determine download time.
@@ -129,43 +129,41 @@ self.addEventListener("message", async (event) => {
   if (type == "embed") {
     const extractor = await MyChatEncoderPipeline.getInstance();
     const chunkVectors = await MyChatEncoderPipeline.getSiteChunkVectors();
-    // const { questions } = await MyChatEncoderPipeline.getSiteData();
+    const { questions } = await MyChatEncoderPipeline.getSiteData();
 
     // loop through questions like a user would
-    // for (let index = 0; index < questions.length; index++) {
-    //   const question = questions[index];
-    //   const { q } = question;
+    for (let index = 0; index < questions.length; index++) {
+      const question = questions[index];
+      const { q, c } = question;
 
-    //   perf = performance.now();
-    //   console.log(`embed question: ${perf}`);
-    //   const questionVector = await extractor(q, {pooling: "mean", normalize: true})
-    //   perf = performance.now();
-    //   console.log(`after embed question: ${perf}`);
+      let perf = performance.now();
+      console.log(`embed question: ${perf}`);
+      const questionVector = await extractor(q, {
+        pooling: "mean",
+        normalize: true,
+      });
+      perf = performance.now();
+      console.log(`after embed question: ${perf}`);
 
-    //   // score and sort
-    // }
+      // const questionVector = await extractor(text, {
+      //   pooling: "mean",
+      //   normalize: true,
+      // });
+      // // only ever one tensor, at least for this prototype
+      // // at least one library, "ai", supports streaming, but
+      // // would be good exercise to possibly write own
+      const questionConvertedTensor = questionVector.tolist()[0];
+      console.log({ q, c });
 
-    let perf = performance.now();
-    console.log(`embed question: ${perf}`);
-    const questionVector = await extractor(text, {
-      pooling: "mean",
-      normalize: true,
-    });
-    perf = performance.now();
-    console.log(`after embed question: ${perf}`);
-    // only ever one tensor, at least for this prototype
-    // at least one library, "ai", supports streaming, but
-    // would be good exercise to possibly write own
-    const questionConvertedTensor = questionVector.tolist()[0];
-
-    const scores: number[] = [];
-    chunkVectors?.map((cv: number[]) => {
-      // dot is the method to compare (dot product), could've used cosine
-      const score = dot(questionConvertedTensor, cv);
-      scores.push(score);
-    });
-    // the index maps back to the chunks to see if the chunks id expected is the first in the score table
-    console.table(scores);
+      const scores: number[] = [];
+      chunkVectors?.map((cv: number[]) => {
+        // dot is the method to compare (dot product), could've used cosine
+        const score = dot(questionConvertedTensor, cv);
+        scores.push(score);
+      });
+      // the index maps back to the chunks to see if the chunks id expected is the first in the score table
+      console.table(scores);
+    }
 
     // TODO: after embedding route to search, if necessary
   }
