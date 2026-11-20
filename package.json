@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prerender": "node scripts/prerender.ts",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

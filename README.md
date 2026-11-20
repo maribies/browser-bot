@@ -148,6 +148,18 @@ Five chunks from `public/api/bot.json` (third person, one per text field, `aka` 
 
 - Conclusion: This test round wasn't enough. The direct questions do the best, as expected, and indirect wording was missed (polyglot for languages, lifelong learner for learn). A score cutoff can't be determined from this data. The plan will be to add more content, test to see what changes, and then more questions. But first, a ranked mapping to make the data comparison easier for these tests, and eventually it would be needed for the full text generation hookup (but not the testing). And when adding more content, it will be important to try not to add content that will result in an expected answer chunk to existing questions, or at least not without adding the new expectation.
 
+##### 2026-11-20: Search ranking rerun after ranking refactor
+
+Same setup as the 2026-11-19 run: model, pinned revision, library, device, browser, machine, chunks and questions unchanged. Cache not cleared.
+
+The scoring output was refactored; every question's ranking and scores were identical to the 2026-11-19 run, to full precision, so the refactor changed only the output format, not the results.
+
+| Step               | Time                              |
+| ------------------ | --------------------------------- |
+| Cached load        | ≈ 866 ms                          |
+| Embed 5 chunks     | ≈ 446 ms                          |
+| Embed one question | ≈ 9–34 ms (the first was slowest) |
+
 ## Licence
 
 Code is [MIT](LICENSE). The site content in `public/api/` is not covered by the licence: © 2026 Marissa Biesecker, all rights reserved.

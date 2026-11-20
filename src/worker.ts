@@ -11,6 +11,7 @@ import {
   type ProgressCallback,
   type ProgressInfo,
 } from "@huggingface/transformers";
+import { rankChunks } from "./lib/rank";
 // TODO: test using optimum.onnxruntime, as suggested by the model card.
 
 type Chunk = { id: string; text: string };
@@ -129,9 +130,9 @@ self.addEventListener("message", async (event) => {
   if (type == "embed") {
     const extractor = await MyChatEncoderPipeline.getInstance();
     const chunkVectors = await MyChatEncoderPipeline.getSiteChunkVectors();
-    const { questions } = await MyChatEncoderPipeline.getSiteData();
+    const { questions, chunks } = await MyChatEncoderPipeline.getSiteData();
 
-    // loop through questions like a user would
+    // loop through questions
     for (let index = 0; index < questions.length; index++) {
       const question = questions[index];
       const { q, c } = question;
@@ -153,7 +154,6 @@ self.addEventListener("message", async (event) => {
       // // at least one library, "ai", supports streaming, but
       // // would be good exercise to possibly write own
       const questionConvertedTensor = questionVector.tolist()[0];
-      console.log({ q, c });
 
       const scores: number[] = [];
       chunkVectors?.map((cv: number[]) => {
@@ -161,8 +161,12 @@ self.addEventListener("message", async (event) => {
         const score = dot(questionConvertedTensor, cv);
         scores.push(score);
       });
-      // the index maps back to the chunks to see if the chunks id expected is the first in the score table
-      console.table(scores);
+
+      // TODO: Eventually want only the top scores, e.g. ranked.slice(0, 3)
+      const ranked = rankChunks(scores, chunks);
+      console.log({ question: q });
+      console.log("expected chunk", ...c);
+      console.table(ranked);
     }
 
     // TODO: after embedding route to search, if necessary
