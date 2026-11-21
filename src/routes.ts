@@ -27,7 +27,6 @@ export const notFound: Route = {
   Page: NotFoundPage,
 };
 
-
 // The pre-rendered file for a route: "/" → "index.html", "/experiences" → "experiences.html".
 export const htmlFile = (url: string) =>
   url === "/" ? "index.html" : `${url.slice(1)}.html`;

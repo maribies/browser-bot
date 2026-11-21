@@ -2,7 +2,7 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 
 import { App } from "./App";
 import { DATA_ELEMENT_ID, notFound, routes } from "./routes";
-import {SiteData} from "./lib/schemas";
+import { SiteData } from "./lib/schemas";
 
 const path = location.pathname.replace(/(\/index)?\.html$/, "") || "/";
 const route = routes[path] ?? notFound;

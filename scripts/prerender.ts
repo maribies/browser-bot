@@ -25,10 +25,9 @@ const vite = await createServer({
 });
 
 try {
-  const { routes, render, loadSiteData, htmlFile } =
-    (await vite.ssrLoadModule(
-      "/src/entry-server.tsx",
-    )) as typeof import("../src/entry-server");
+  const { routes, render, loadSiteData, htmlFile } = (await vite.ssrLoadModule(
+    "/src/entry-server.tsx",
+  )) as typeof import("../src/entry-server");
   const data = await loadSiteData(fetchJson);
   const urls = Object.keys(routes);
 
