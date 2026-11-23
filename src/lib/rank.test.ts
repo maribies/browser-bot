@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { rankChunks } from "./lib/rank";
+import { rankChunks } from "./rank";
 
 const chunks = [
   { id: "home.hero.role" },

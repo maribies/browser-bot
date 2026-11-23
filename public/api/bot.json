@@ -6,8 +6,50 @@
       "aka": "aka Utility Player, A designation awarded to her by her youth soccer coach for being able to play any position on the field."
     },
     "info": {
-      "title": "Hi! She is Marissa. She is a product-minded, AI-tinkering, polyglot builder and lifelong learner.",
+      "title": "She is a product-minded, AI-tinkering, polyglot builder and lifelong learner.",
       "summary": "She is also a former retail buyer, a futebol player, a marathon runner, and a digital nomad. Her path here wasn't a straight line, and that is where her instincts come from. Business school and buying taught her to see a business as a system. Design school taught her to start from the person using the thing. Consulting let her practice both, and building payments at Flexa sharpened the systems side. Now she builds things people want, and she builds them so the pieces hold together."
+    }
+  },
+  "experiencesProjects": {
+    "browserBot": {
+      "overview": "Browser Bot (November 2026 - present). Engineer and product owner. A small chatbot for this portfolio site that runs entirely in the visitor's browser and answers only from the supplied content. Open source.",
+      "roleSummary": "Browser Bot: Sole author. Planned and designed the project, with Claude assisting in summarizing and organizing documents and research, which was then reviewed and tweaked. Code was written by hand, using Claude as a reviewer and rubber duck that only provided hints when asked.",
+      "skills": [
+        "Browser Bot: Started with a feasibility test before building anything else: can an embedding model and a small generative model load in the browser and answer usefully from the content, and if not, why not?",
+        "Browser Bot: Loaded a quantized sentence embedding model (all-MiniLM-L6-v2) in a Web Worker with Transformers.js, pinned to a model revision, and recorded cold and cached load times of about 2 seconds and under 1 second.",
+        "Browser Bot: Designed the eventual pipeline so plain code answers known questions first and an opt-in generative model only summarizes retrieved content, with zero hosting cost and no data collection as hard constraints."
+      ],
+      "keywords": "Browser Bot: Used: TypeScript, React, Transformers.js, Web Workers, Semantic search, Machine learning"
+    },
+    "garmentSegmentation": {
+      "overview": "Garment Segmentation (September 2026 - present). ML and full-stack engineer. Fine-tuning open-source segmentation models to cut clothing out of ordinary photographs while documenting learning and reasoning as it goes. Open source.",
+      "roleSummary": "Garment Segmentation: Main author. Designed the model-agnostic segmentation interface, ran and hand-triaged the baseline, wrote the referential data validators, and built the FastAPI + React viewer over a PostgreSQL schema.",
+      "keywords": "Garment Segmentation: Used Image segmentation, Alpha matting, Computer vision, AI model research, Model evaluation, Baseline-first methodology, Dataset curation, Hand-labeled triage, Python, PyTorch, BiRefNet, SegFormer, FastAPI, SQLAlchemy 2.0, PostgreSQL, Docker Compose, React, TypeScript, Tailwind CSS, TanStack Query, Pytest, Uv",
+      "skills": [
+        "Garment Segmentation: Designed a model-agnostic segmentation interface returning soft alpha rather than binary masks, so adding a model is one class and one registry entry — the intermediate values are where fur, sheer fabric and open lacework live.",
+        "Garment Segmentation: Established a hand-judged baseline across two pretrained models and 22 photographs before any training, to fix the number fine-tuning has to beat and identify which images are worth the cost of labeling.",
+        "Garment Segmentation: Identified complementary failure modes between BiRefNet and SegFormer — and that the stronger model passed every flat-lay shot while failing every on-body shot, the actual target domain — which redirected the next round of data collection.",
+        "Garment Segmentation: Replaced free-text failure notes with an eleven-term closed vocabulary, making failures countable and surfacing hanger artifacts as the single largest cause at 14 of 44 verdicts.",
+        "Garment Segmentation: Built referential validators over three relational CSV tables that catch a truncated identifier three ways at once, rather than relying on duplicated columns agreeing with each other.",
+        "Garment Segmentation: Modeled the dataset in PostgreSQL with nanoid primary keys, native enums for closed vocabularies and array columns for multi-valued fields, each enforced by database constraints rather than application-level checks.",
+        "Garment Segmentation: Ran the test suite against PostgreSQL in Docker rather than SQLite, using transaction-per-test rollback, to close the dev/prod parity gap that hides constraint and type-coercion bugs.",
+        "Garment Segmentation: Verified the suite had teeth by mutation testing — neutering one check constraint failed 28 tests, and the method exposed an earlier security test that passed with its guard deleted.",
+        "Garment Segmentation: Built a local FastAPI and React/TypeScript viewer serving 24-megapixel originals downscaled and cached beside each model's cut-out and verdict.",
+        "Garment Segmentation: Analyzed licensing across both model code and training data, establishing that SegFormer's NVIDIA non-commercial terms bar it from a commercial product regardless of the repository's own MIT license."
+      ]
+    },
+    "pixelPup": {
+      "overview": "Pixel Pup Garmin Watchface (June 2026 - present). Project Owner for an animated Garmin watchface. Free and open source.",
+      "roleSummary": "Pixel Pup: Designed and implemented a Garmin watchface with cute pixel dog animations using Claude to write most of the code based on prompting, while guiding, reviewing, and testing along the way. Developed and provided the art assets.",
+      "keywords": "Pixel Pup: Used Claude, Monkey C, Ideation, Design, Planning, Project management, Open source, Maintenance, Pixel art, Research",
+      "skills": [
+        "Pixel Pup: Provided product direction and planning, including scope.",
+        "Pixel Pup: Kicked off the project scaffolding.",
+        "Pixel Pup: Carefully reviewed and tested the implementation with Claude and by hand.",
+        "Pixel Pup: Decided when each release happened.",
+        "Pixel Pup: Followed up on feedback when given by users, adjusting the artwork to scale on bigger devices and expanding the artwork selection.",
+        "Pixel Pup: Researched, developed, and documented strategy for consistent pixel art."
+      ]
     }
   }
 }

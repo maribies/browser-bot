@@ -12,11 +12,15 @@ import {
   type ProgressInfo,
 } from "@huggingface/transformers";
 import { rankChunks } from "./lib/rank";
+import { type Chunk, flattenSiteContentIntoChunks } from "./lib/chunks";
+import {
+  botContentSchema,
+  questionsSchema,
+  type Question,
+} from "./lib/schemas";
 // TODO: test using optimum.onnxruntime, as suggested by the model card.
 
-type Chunk = { id: string; text: string };
-type Question = { q: string; c: string[]; e: string; d: string };
-type SiteData = Promise<{ chunks: Chunk[]; questions: Question[] }>;
+type BotSiteData = Promise<{ chunks: Chunk[]; questions: Question[] }>;
 
 // Search / embeddings - Encoder
 class MyChatEncoderPipeline {
@@ -25,7 +29,7 @@ class MyChatEncoderPipeline {
   static instance: Promise<FeatureExtractionPipeline> | null = null;
   static revision: string = "751bff37182d3f1213fa05d7196b954e230abad9";
   static chunkVectors: number[][] | null = null;
-  static siteData: SiteData | null = null;
+  static siteData: BotSiteData | null = null;
 
   static async getInstance(progress_callback?: ProgressCallback) {
     this.instance ??= getInstance(
@@ -84,28 +88,17 @@ async function getInstance<T extends PipelineType>(
 }
 
 // TODO: Consider if getting the site data needs to be grouped or it should be done separately. Probably together, but think it through more later.
-async function getSiteData(): SiteData {
+async function getSiteData(): BotSiteData {
   // normally we would want to embed the event.data.text instad of the questions, but for these testing purposes, we are looping through the questions json file instead
   const [contentResp, questionsResp] = await Promise.all([
     fetch("/api/bot.json"), // TODO: Run tests switching out with copy.json to see if voice matters.
     fetch("/api/questions.json"),
   ]);
 
-  const content = await contentResp.json();
-  const questions = await questionsResp.json();
+  const content = botContentSchema.parse(await contentResp.json());
+  const questions = questionsSchema.parse(await questionsResp.json());
 
-  // flatten the content.json
-  // TODO: (lodash or a helper function would be helpful for more content), this could be used for a test
-  const { hero, info } = content.home;
-  const { role: heroRole, summary: heroSummary, aka: heroAka } = hero;
-  const { title: infoTitle, summary: infoSummary } = info;
-  const chunks = [
-    { id: "home.hero.role", text: heroRole },
-    { id: "home.hero.summary", text: heroSummary },
-    { id: "home.hero.aka", text: heroAka },
-    { id: "home.info.title", text: infoTitle },
-    { id: "home.info.summary", text: infoSummary },
-  ];
+  const chunks = flattenSiteContentIntoChunks(content);
 
   return { chunks, questions };
 }

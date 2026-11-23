@@ -1,11 +1,15 @@
 [
   {
     "q": "What kind of engineer is she?",
-    "c": ["home.hero.role"],
-    "e": "answers: 'full-stack', citing the hero role",
-    "d": "it would be great if it says a non-traditional one and sites the info summary"
+    "c": [
+      "home.hero.role",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.browserBot.overview",
+      "experiencesProjects.pixelPup.overview"
+    ],
+    "e": "answers: 'full-stack', citing the hero role, experiences. the browser bot doesn't specify the type, but it will match, and should match the projects as software engineering",
+    "d": "it would be great if it says a non-traditional one and sites the info summary. I also want it to key into the ML learning of the garment segmentation, but not overstate being an ML engineer."
   },
-
   {
     "q": "What does she enjoy doing?",
     "c": ["home.hero.summary", "home.info.summary"],
@@ -14,11 +18,19 @@
   },
   {
     "q": "What has she built before?",
-    "c": ["home.hero.summary", "home.info.summary"],
-    "e": "possible answers: payments, 'things people want', 'pieces that hold together', citing the info summary and/or 'something pepole actually want to use', citing the hero summary",
+    "c": [
+      "home.hero.summary",
+      "home.info.summary",
+      "experiencesProjects.garmentSegmentation.roleSummary",
+      "experiencesProjects.garmentSegmentation.skills.4",
+      "experiencesProjects.garmentSegmentation.skills.8",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.browserBot.overview",
+      "experiencesProjects.pixelPup.overview"
+    ],
+    "e": "possible answers: payments, 'things people want', 'pieces that hold together', citing the info summary and/or 'something people actually want to use', citing the hero summary, keys off build in experiences. the overviews would be correct, but not likely to get ranked highly",
     "d": "it cites more specifics from the experiences content or directs the user to look at the experiences section or page"
   },
-
   {
     "q": "What did her soccer coach call her?",
     "c": ["home.hero.aka"],
@@ -31,26 +43,40 @@
     "e": "any position on the field",
     "d": "could add that defense or midfield were strengths"
   },
-
   {
     "q": "Does she know anything about AI?",
-    "c": ["home.info.title"],
-    "e": "answers affirmatively, citing that she likes tinkering with AI from the info title",
-    "d": "cites and directs the user to her experiences related to AI"
+    "c": [
+      "home.info.title",
+      "experiencesProjects.garmentSegmentation.keywords",
+      "experiencesProjects.browserBot.overview",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.pixelPup.overview"
+    ],
+    "e": "answers affirmatively, citing that she likes tinkering with AI from the info title, keys off of AI in the project. Only expecting the first two to match, but the other chunks should be cited.",
+    "d": "cites and directs the user to her experiences related to AI, including all the projects"
   },
   {
     "q": "What languages does she know?",
-    "c": ["home.info.title"],
-    "e": "it does not know from the current content, but cites her knowledge of multiple languages (polyglot) in the info title",
+    "c": [
+      "home.info.title",
+      "experiencesProjects.browserBot.keywords",
+      "experiencesProjects.garmentSegmentation.keywords",
+      "experiencesProjects.pixelPup.keywords"
+    ],
+    "e": "it does not know from the current content, but cites her knowledge of multiple languages (polyglot) in the info title, it should also pick up languages listed in the experiences",
     "d": "it would return the list of tech languages and Portuguese, with ability to read and largely miscommunicate in French, and that calling herself a polygot is a bit tongue-in-cheek."
   },
   {
     "q": "Does she like to learn?",
-    "c": ["home.info.title"],
-    "e": "answers affirmatively, citing the info title",
+    "c": [
+      "home.info.title",
+      "experiencesProjects.browserBot.overview",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.pixelPup.overview"
+    ],
+    "e": "Answers affirmatively, citing the info title. It will likely key off of learning in the garmentSegmentation. It probably won't pick up the projects, but it could, as doing projects shows a desire to learn, indirectly.",
     "d": "when combined with experience content, cites the projects"
   },
-
   {
     "q": "Did she go to business school?",
     "c": ["home.info.summary"],
@@ -69,7 +95,147 @@
     "e": "yes, cites buying",
     "d": "combined with experience content, returns WDFG under business experience"
   },
+  {
+    "q": "Marissa joga futebol?",
+    "c": ["home.info.summary"],
+    "e": "if it picks up the portuguese, which it really should for this because I use futebol player",
+    "d": "it can answer"
+  },
+  {
+    "q": "Where is she located?",
+    "c": ["home.info.summary"],
+    "e": "it picks up digital nomad",
+    "d": "It will be able to state that I like to live in Portugal and work while traveling (digital nomad), and am currently authorized to work in Porgual and the US, as I am a US citizen."
+  },
+  {
+    "q": "What companies has Marissa worked for?",
+    "c": ["home.info.summary"],
+    "e": "it should pick up on Flexa, but it likely won't. Flexa is the only named company.",
+    "d": "When work experiences are added, it should pick up all those company names in their respective overviews."
+  },
+  {
+    "q": "Does she still play soccer?",
+    "c": ["home.info.summary"],
+    "e": "it keys off of she is ... a futebol player, but I don't expect it actually will.",
+    "d": "it should return that she does and plans to continue playing as long as she is able."
+  },
 
+  {
+    "q": "Ela sabe usar ferramentas de IA, como o Claude?",
+    "c": [
+      "experiencesProjects.browserBot.roleSummary",
+      "experiencesProjects.pixelPup.roleSummary",
+      "experiencesProjects.pixelPup.keywords",
+      "experiencesProjects.pixelPup.skills.2"
+    ],
+    "e": "either it's not good with Portuguese, or picks up where Claude is explicitly mentioned",
+    "d": "Also picks up windsurf"
+  },
+  {
+    "q": "Does Marissa like dogs?",
+    "c": ["experiencesProjects.pixelPup.roleSummary"],
+    "e": "it probably won't be a very strong match, so it might not make the cut, but this should be some indication that I do",
+    "d": "responds in the affirmative, and that's why she did pixel pup"
+  },
+  {
+    "q": "Has she ever used FastAPI?",
+    "c": [
+      "experiencesProjects.garmentSegmentation.roleSummary",
+      "experiencesProjects.garmentSegmentation.keywords",
+      "experiencesProjects.garmentSegmentation.skills.8"
+    ],
+    "e": "she built garmentSegmentation with it",
+    "d": "would be great if it was a more specific"
+  },
+  {
+    "q": "Has Marissa ever worked on open source projects?",
+    "c": [
+      "experiencesProjects.browserBot.overview",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.pixelPup.overview",
+      "experiencesProjects.pixelPup.keywords"
+    ],
+    "e": "affirmative, lists the three projects.",
+    "d": "maybe some extra information about liking to give back"
+  },
+  {
+    "q": "What does she know about testing?",
+    "c": [
+      "experiencesProjects.garmentSegmentation.skills.7",
+      "experiencesProjects.browserBot.skills.0",
+      "experiencesProjects.garmentSegmentation.skills.6",
+      "experiencesProjects.pixelPup.roleSummary",
+      "experiencesProjects.pixelPup.skills.2"
+    ],
+    "e": "testing before building, creates test suites, tests the tests, tests implementation",
+    "d": "more information about being dedicated to testing on all levels. Unit, integration, full product by hand."
+  },
+  {
+    "q": "What kind of models has she worked with?",
+    "c": [
+      "experiencesProjects.browserBot.skills.0",
+      "experiencesProjects.browserBot.skills.1",
+      "experiencesProjects.browserBot.skills.2",
+      "experiencesProjects.garmentSegmentation.skills.0",
+      "experiencesProjects.garmentSegmentation.keywords",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.garmentSegmentation.roleSummary"
+    ],
+    "e": "embedding (all-MiniLM-L6-v2), generative, segmentation, but I think it will also get caught up in other details and possibly confused with data modeling",
+    "d": "embedding (all-MiniLM-L6-v2), generative, segmentation, pre-trained are all acceptable"
+  },
+  {
+    "q": "What was Claude's role for the browser bot?",
+    "c": ["experiencesProjects.browserBot.roleSummary"],
+    "e": "assisted in summarizing and organizing documents and rearch, reviewer and rubber duck providing hints",
+    "d": "definitely want to acknowledge using Claude, but not over-state its role."
+  },
+  {
+    "q": "What was the primary language used for the browser bot project?",
+    "c": ["experiencesProjects.browserBot.keywords"],
+    "e": "JavaScript/TypeScript, or it doesn't know because it's indirect",
+    "d": "It can identify JavaScript/TypeScript through the keywords."
+  },
+  {
+    "q": "What was the primary language used for the garment segmentation project?",
+    "c": ["experiencesProjects.garmentSegmentation.keywords"],
+    "e": "Python or JavaScript/TypeScript, or it doesn't know because it's indirect",
+    "d": "It can identify python for the modeling experimentation and backend, JavaScript/TypeScript through React and keywords."
+  },
+  {
+    "q": "Did Claude play a role in the pixel pup project?",
+    "c": [
+      "experiencesProjects.pixelPup.roleSummary",
+      "experiencesProjects.pixelPup.skills.2"
+    ],
+    "e": "wrote most of the code, reviewed and tested",
+    "d": "while answering what Claude did, also provides why Claude did and what I did to drive it"
+  },
+  {
+    "q": "What was the primary language used for the pixel pup project?",
+    "c": ["experiencesProjects.pixelPup.keywords"],
+    "e": "Monkey C, or it doesn't know because it's indirect",
+    "d": "It knows Monkey C. Might need to supply this explicitly."
+  },
+  {
+    "q": "What does Marissa know about working with artificial intelligence?",
+    "c": [
+      "home.info.title",
+      "experiencesProjects.garmentSegmentation.keywords",
+      "experiencesProjects.browserBot.overview",
+      "experiencesProjects.garmentSegmentation.overview",
+      "experiencesProjects.pixelPup.overview"
+    ],
+    "e": "Doubtful it will match when spelled out",
+    "d": "Should match numerous experiences, like it does for AI, might be best to give additional context."
+  },
+
+  {
+    "q": "Did Claude play a role in the garment segmentation project?",
+    "c": [],
+    "e": "can't answer from the provided",
+    "d": "it should be able to answer what Claude did because I did use Claude"
+  },
   {
     "q": "Can I speak to a human?",
     "c": [],
@@ -117,5 +283,23 @@
     "c": [],
     "e": "it does not know from the current content",
     "d": "it will able to respond affirmatively and cite the source or how it knows"
+  },
+  {
+    "q": "Does Marissa know Java?",
+    "c": [],
+    "e": "it does not know from current content",
+    "d": "it should return a negative, as there shouldn't be any support for this"
+  },
+  {
+    "q": "Where was Marissa born?",
+    "c": [],
+    "e": "it does not know from current content",
+    "d": "it should return a USA, maybe PA"
+  },
+  {
+    "q": "Where is Marissa authorized to work?",
+    "c": [],
+    "e": "it does not know from current content",
+    "d": "It shuold return Portugal and USA"
   }
 ]
